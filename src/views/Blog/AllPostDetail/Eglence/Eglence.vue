@@ -3,11 +3,12 @@
     <b-row>
       <!-- blogs -->
       <b-col v-for="blog in blogDetail" :key="blog.img" cols="12">
-        <b-card
+        <b-card 
           img-top
           img-alt="Blog Detail Pic"
           :img-src="blog.img"
           :title="blog.title"
+          class="bg-transparent"
         >
           <b-media no-body>
             <b-media-aside vertical-align="center" class="mr-50">

@@ -1,79 +1,77 @@
 <template>
   <!-- blogs -->
-  <b-row class="blog-list-wrapper">
-    <b-col v-for="blog in blogList" :key="blog.img" md="12">
-      <b-card tag="article" no-body>
-        <b-row>
-          <b-col md="6">
-            <b-img
-              :src="blog.img"
-              :alt="blog.img.slice(5)"
-              class="card-img-top"
-              style="max-width: 100%"
-            />
-          </b-col>
-          <b-col md="6">
-            <b-card-body>
-              <b-card-title>
-                <b-link
-                  class="blog-title-truncate text-body-heading"
+  <b-row>
+    <b-col cols="12" sm="6" md="4" v-for="blog in blogList" :key="blog.img">
+      <b-card-group deck class="mb-2">
+        <b-card
+          :img-src="blog.img"
+          :alt="blog.img.slice(5)"
+          class="card-img-top bg-transparent"
+          img-top
+          no-body
+        >
+          <b-card-body>
+            <b-media no-body>
+              <b-media-aside vertical-align="center" class="mr-50 mb-1">
+                <b-avatar
+                  href="javascript:void(0)"
+                  size="24"
+                  :src="blog.avatar"
+                />
+              </b-media-aside>
+              <b-media-body>
+                <small class="text-muted mr-50">by</small>
+                <small
+                  ><b-link class="text-body">{{
+                    blog.userFullName
+                  }}</b-link></small
                 >
-                  {{ blog.title }}
-                </b-link>
-              </b-card-title>
-              <b-media no-body>
-                <b-media-aside vertical-align="center" class="mr-50">
-                  <b-avatar
-                    href="javascript:void(0)"
-                    size="24"
-                    :src="blog.avatar"
-                  />
-                </b-media-aside>
-                <b-media-body>
-                  <small class="text-muted mr-50">by</small>
-                  <small
-                    ><b-link class="text-body">{{
-                      blog.userFullName
-                    }}</b-link></small
+                <span class="text-muted ml-75 mr-50">|</span>
+                <small class="text-muted">{{ blog.blogPosted }}</small>
+              </b-media-body>
+            </b-media>
+            <b-card-title>
+              <b-link class="blog-title-truncate text-body-heading">
+                {{ blog.title }}
+              </b-link>
+            </b-card-title>
+           
+            <div class="my-1 py-20">
+              <b-link v-for="(tag, index) in blog.tags" :key="index">
+                <b-badge pill class="mr-75" :variant="tagsColor(tag)">{{
+                  tag
+                }}</b-badge>
+              </b-link>
+            </div>
+            <b-card-text class="blog-content-truncate">{{
+              blog.excerpt
+            }}</b-card-text>
+            <hr />
+            <div class="d-flex justify-content-between align-items-center">
+              <b-link :to="{ path: `/pages/blog/${blog.id}#blogComment` }">
+                <div class="d-flex align-items-center text-body">
+                  <feather-icon icon="HeartIcon" class="mr-50" />
+                  <span class="font-weight-bold"
+                    >{{ kFormatter(blog.comment) }}</span
                   >
-                  <span class="text-muted ml-75 mr-50">|</span>
-                  <small class="text-muted">{{ blog.blogPosted }}</small>
-                </b-media-body>
-              </b-media>
-              <div class="my-1 py-20">
-                <b-link v-for="(tag, index) in blog.tags" :key="index">
-                  <b-badge pill class="mr-75" :variant="tagsColor(tag)">{{
-                    tag
-                  }}</b-badge>
-                </b-link>
-              </div>
-              <b-card-text class="blog-content-truncate">{{
-                blog.excerpt
-              }}</b-card-text>
-              <hr />
-              <div class="d-flex justify-content-between align-items-center">
-                <b-link :to="{ path: `/pages/blog/${blog.id}#blogComment` }">
-                  <div class="d-flex align-items-center text-body">
-                    <feather-icon icon="MessageSquareIcon" class="mr-50" />
-                    <span class="font-weight-bold"
-                      >{{ kFormatter(blog.comment) }} Comments</span
-                    >
-                  </div>
-                </b-link>
+                  <feather-icon icon="MessageSquareIcon" class="mr-50 ml-1" />                
+                  <span class="font-weight-bold"
+                    >{{ kFormatter(blog.comment) }} Comments</span
+                  >
+                </div>
+              </b-link>
 
-                <!-- Read More Button -->
-                <b-link
-                  class="font-weight-bold"
-                  style="color: black; font-size: 12px"
-                  @click="changeActiveTab(blog.id, blog.tabs)"
-                >
-                  Read More..
-                </b-link>
-              </div>
-            </b-card-body>
-          </b-col>
-        </b-row>
-      </b-card>
+              <!-- Read More Button -->
+              <b-button
+                class="ReadMore"
+                @click="changeActiveTab(blog.id, blog.tabs)"
+              >
+                <feather-icon style="color: grey;" icon="ChevronsRightIcon" class="mr-50" />
+              </b-button>
+            </div>
+          </b-card-body>
+        </b-card>
+      </b-card-group>
     </b-col>
   </b-row>
 </template>
@@ -95,6 +93,8 @@ import {
   BBadge,
   BPagination,
   BButton,
+  BCardGroup,
+  BCardFooter,
 } from "bootstrap-vue";
 import { kFormatter } from "@core/utils/filter";
 
@@ -115,6 +115,8 @@ export default {
     BImg,
     BPagination,
     BButton,
+    BCardGroup,
+    BCardFooter,
   },
   data() {
     return {
@@ -131,7 +133,7 @@ export default {
           tags: ["Trend"],
           tabs: "trend",
           excerpt:
-            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.",
+            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes ",
           comment: 76,
         },
         {
@@ -146,7 +148,7 @@ export default {
           tags: ["Eglence"],
           tabs: "eglence",
           excerpt:
-            "E-spor, son yıllarda dünya genelinde büyük bir yükseliş yaşayan ve hızla büyümeye devam eden bir fenomendir. Geleneksel spor dallarının aksine, e-spor, oyuncuların bilgisayarlar veya oyun konsolları üzerinden rekabet ettiği bir arenadır. Ancak, bu dijital dünya çoktan sadece bir oyun olarak görülmüyor.",
+            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes ",
           comment: 2100,
         },
         {
@@ -160,7 +162,7 @@ export default {
           tags: ["Trend"],
           tabs: "trend",
           excerpt:
-            "Tiramisu jelly-o chupa chups tootsie roll donut wafer marshmallow cheesecake topping.",
+            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes",
           comment: 243,
         },
         {
@@ -175,7 +177,7 @@ export default {
           tags: ["Trend"],
           tabs: "trend",
           excerpt:
-            "Croissant apple pie lollipop gingerbread. Cookie jujubes chocolate cake icing cheesecake.",
+            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes",
           comment: 3200,
         },
         {
@@ -188,7 +190,7 @@ export default {
           tags: ["Tasarim"],
           tabs: "tasarim",
           excerpt:
-            "Muffin liquorice candy soufflé bear claw apple pie icing halvah. Pie marshmallow jelly.",
+            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes",
           comment: 319,
         },
         {
@@ -203,7 +205,7 @@ export default {
           tags: ["Eglence"],
           tabs: "eglence",
           excerpt:
-            "A little personality goes a long way, especially on a business blog. So don’t be afraid to let loose.",
+            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes",
           comment: 1500,
         },
       ],
@@ -235,10 +237,12 @@ export default {
 .blog-title-truncate {
   font-size: 20px;
 }
-
 .card-img-top {
-  max-width: 100%;
-  height: auto;
+  margin-top: 0;
+}
+.ReadMore{
+  background:transparent !important ;
+  border: none;
 }
 </style>
 <style lang="scss">

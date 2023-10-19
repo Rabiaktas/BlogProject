@@ -8,6 +8,8 @@
             img-alt="Blog Detail Pic"
             :img-src="blog.img"
             :title="blog.title"
+          class="bg-transparent"
+
           >
             <b-media no-body>
               <b-media-aside vertical-align="center" class="mr-50">

@@ -5,11 +5,11 @@
         <b-card-text>
           <br /><br />
           <b-row>
-            <b-col md="2"></b-col>
-            <b-col md="8"
+            <b-col md="1"></b-col>
+            <b-col md="10"
               ><all-posts @changeActiveTabEvent="activeBlogId = $event"
             /></b-col>
-            <b-col md="2"></b-col>
+            <b-col md="1"></b-col>
           </b-row>
         </b-card-text>
       </b-tab>
