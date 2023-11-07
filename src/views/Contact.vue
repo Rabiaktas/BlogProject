@@ -2,13 +2,7 @@
   <div>
     <!-- NavBar-->
     <just-nav />
-    <!-- Title-->
-    <b-card class="headtitle">
-      <div class="container">
-        <h1 align="center">CONTACT</h1>
-      </div>
-    </b-card>
-
+  
     <!--Form -->
     <div class="cardForm">
       <b-row>
@@ -16,31 +10,31 @@
         <b-col md="8">
           <br />
           <b-card class="contactCard">
-            <b-col md="12"><h2>To Work With Us</h2></b-col>
+            <b-col md="12"><h2>Bizimle Çalışmak İçin;</h2></b-col>
             <hr />
 
             <b-col md="12">
-              <b-form @submit.prevent>
+              <b-form @submit.prevent="onSubmit">
                 <b-row>
                   <b-col md="6">
-                    <b-form-group label="First Name" label-for="mc-first-name">
-                      <b-form-input id="mc-first-name" />
+                    <b-form-group label="İsim" label-for="mc-first-name">
+                      <b-form-input v-model="post.userName" id="mc-first-name" />
                     </b-form-group>
                   </b-col>
                   <b-col md="6">
-                    <b-form-group label="Last Name" label-for="mc-last-name">
-                      <b-form-input id="mc-last-name" />
+                    <b-form-group label="Soyisim" label-for="mc-last-name">
+                      <b-form-input v-model="post.userLastName" id="mc-last-name" />
                     </b-form-group>
                   </b-col>
                   <b-col md="6">
-                    <b-form-group label="Mobile" label-for="v-mobile">
-                      <b-form-input id="v-mobile" type="number" />
+                    <b-form-group label="Telefon" label-for="v-mobile">
+                      <b-form-input v-model="post.mobile" id="v-mobile" type="number" />
                     </b-form-group>
                   </b-col>
                   <b-col md="6">
                     <b-form-group label-for="mc-email" label="Email">
                       <div class="form-label-group">
-                        <b-form-input id="mc-email" type="email" />
+                        <b-form-input v-model="post.email" id="mc-email" type="email" />
                       </div>
                     </b-form-group>
                   </b-col>
@@ -49,9 +43,9 @@
                       <b-form-textarea
                         id="textarea"
                         rows="3"
-                        placeholder="About You..."
+                        placeholder="Hakkınızda.."
+                        v-model="post.userLastName"
                       />
-                      <label for="label-textarea">Label in Textarea</label>
                     </div>
                   </b-col>
 
@@ -64,8 +58,9 @@
                       type="submit"
                       variant="outline-secondary"
                       id="submitForm"
+                      v-model="post.aboutYou"
                     >
-                      SUBMIT
+                      GÖNDER
                     </b-button>
                   </b-col>
                 </b-row>
@@ -73,7 +68,6 @@
             </b-col> </b-card
           ><br
         /></b-col>
-
         <b-col md="2"></b-col>
       </b-row>
     </div>
@@ -98,7 +92,7 @@ import {
 import JustNav from "./home/components/JustNav.vue";
 import Ripple from "vue-ripple-directive";
 import footerVue from "./home/components/footer.vue";
-
+import axios from "axios";
 export default {
   components: {
     JustNav,
@@ -118,13 +112,35 @@ export default {
   directives: {
     Ripple,
   },
+  data() {
+      return {
+        post: {
+          userName: "",
+          userLastName: "",
+          mobile: "",
+          email: "",
+          aboutYou: "",
+        }
+      }
+    },
+  methods: {
+      onSubmit() {
+        axios.post("https://rabishblogpublic-default-rtdb.firebaseio.com/posts.json", {...this.post, updatedDate: new Date()})
+          .then(response => {
+            console.log(response)
+            this.post = {}
+          })
+          .catch(e => console.log(e));
+
+      }
+    }
 };
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Abel&family=Dancing+Script&family=Prompt:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 .cardForm {
-  margin-top: 68px;
+  margin-top: 120px;
   font-family: "Prompt", sans-serif;
   background-image: url(../assets/images/icons/contactArkaPlan.jpg);
   background-size: cover; 
@@ -135,8 +151,8 @@ export default {
 .headtitle {
   font-family: "Prompt", sans-serif;
   position: relative;
-  top: 67px;
   z-index: 100;
+  margin-top: 120px;
 }
 h2 {
   text-align: center;

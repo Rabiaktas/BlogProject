@@ -6,15 +6,16 @@
       <b-card class="container baslik">
         <b-card-text> <h2>Galeri</h2> </b-card-text>
         <swiper
-          class="swiper-multiple"
+          class="swiper-autoplay"
           :options="swiperOptions"
           :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+          :key="swiperOptions.slidesPerView"
         >
           <swiper-slide v-for="(data, index) in swiperData" :key="index">
             <div class="image-container">
               <b-img :src="data.img" fluid />
               <div class="container overlay">
-                <div>@RabishBlog </div>
+                <div>@JourneyBlog</div>
               </div>
             </div>
           </swiper-slide>
@@ -26,7 +27,7 @@
   </b-row>
 </template>
 <script>
-import { BCard, BCardText, BImg,BRow, BCol } from "bootstrap-vue";
+import { BCard, BCardText, BImg, BRow, BCol } from "bootstrap-vue";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 export default {
@@ -37,7 +38,7 @@ export default {
     Swiper,
     SwiperSlide,
     BRow,
-    BCol
+    BCol,
   },
   data() {
     return {
@@ -52,10 +53,14 @@ export default {
         { img: require("@/assets/images/banner/banner-31.jpg") },
         { img: require("@/assets/images/banner/banner-35.jpg") },
       ],
-
+      /* eslint-disable global-require */
       swiperOptions: {
         slidesPerView: 4,
         spaceBetween: 20,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
@@ -63,11 +68,20 @@ export default {
       },
     };
   },
+  mounted() {
+    if (window.innerWidth <= 1000) {
+      this.swiperOptions.slidesPerView = 2;
+    } else {
+      this.swiperOptions.slidesPerView = 4;
+    }
+  },
 };
 </script>
 <style>
 .baslik {
   font-family: "Prompt", sans-serif;
+  background: transparent;
+  box-shadow: none;
 }
 .image-container {
   position: relative;
@@ -82,7 +96,7 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  display:flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;

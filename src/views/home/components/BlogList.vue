@@ -4,10 +4,8 @@
     <b-col v-for="blog in blogList" :key="blog.img" md="12">
       <b-card class="fontCard" tag="article" no-body>
         <b-row>
-          <b-col md="6">
-            <b-link
-              :to="{ name: 'second-page', params: { id: blog.id } }"
-            >
+          <b-col md="5">
+            <b-link :to="{ name: 'second-page', params: { id: blog.id } }">
               <b-img
                 :src="blog.img"
                 :alt="blog.img.slice(5)"
@@ -15,61 +13,54 @@
               />
             </b-link>
           </b-col>
-          <b-col md="6">
+          <b-col md="7">
             <b-card-body>
               <b-card-title>
                 <b-link
                   :to="{ name: 'second-page', params: { id: blog.id } }"
                   class="blog-title-truncate text-body-heading"
                 >
-                  {{ blog.title }}
-                </b-link> 
+                  <h2 class="display-5">{{ blog.title }}</h2>
+                </b-link>
               </b-card-title>
               <div class="altkisim">
-              <b-media no-body>
-                <b-media-aside vertical-align="center" class="mr-50">
-                  <b-avatar
-                    href="javascript:void(0)"
-                    size="24"
-                    :src="blog.avatar"
-                  />
-                </b-media-aside>
-                <b-media-body>
-                  <small class="text-muted mr-50">by</small>
-                  <small>
-                    <b-link class="text-body">{{ blog.userFullName }}</b-link>
-                  </small>
-                  <span class="text-muted ml-75 mr-50">|</span>
-                  <small class="text-muted">{{ blog.blogPosted }}</small>
-                </b-media-body>
-              </b-media>
-              <div class="my-1 py-25">
-                <b-link v-for="(tag, index) in blog.tags" :key="index">
-                  <b-badge pill class="mr-75" :variant="tagsColor(tag)">
-                    {{ tag }}
-                  </b-badge>
-                </b-link>
-              </div> 
-              <b-card-text class="blog-content-truncate">
-                {{ blog.excerpt }}
-              </b-card-text>
-             <hr />
-              <div class="d-flex justify-content-between align-items-center">
-                <b-link :to="{ path: `/pages/blog/${blog.id}#blogComment` }">
-                  <div class="d-flex align-items-center text-body">
-                    <feather-icon icon="MessageSquareIcon" class="mr-50" />
-                    <span class="font-weight-bold"
-                      >{{ kFormatter(blog.comment) }} Comments</span
-                    >
-                  </div>
-                </b-link>
-                <b-link
-                  :to="{ name: 'second-page', params: { id: blog.id } }"
-                  class="font-weight-bold"
-                >
-                  Read More
-                </b-link>
-              </div></div>
+                <b-media no-body>
+                  <b-media-aside vertical-align="center" class="mr-50">
+                    <b-avatar
+                      href="javascript:void(0)"
+                      size="24"
+                      :src="blog.avatar"
+                    />
+                  </b-media-aside>
+                  <b-media-body>
+                    <small class="text-muted mr-50">by</small>
+                    <small>
+                      <b-link class="text-body">{{ blog.userFullName }}</b-link>
+                    </small>
+                    <span class="text-muted ml-75 mr-50">|</span>
+                    <small class="text-muted">{{ blog.blogPosted }}</small>
+                  </b-media-body>
+                </b-media>
+                <div class="my-1 py-25">
+                  <b-link v-for="(tag, index) in blog.tags" :key="index">
+                    <b-badge pill class="mr-75" :variant="tagsColor(tag)">
+                      {{ tag }}
+                    </b-badge>
+                  </b-link>
+                </div>
+                <b-card-text class="blog-content-truncate">
+                  {{ blog.excerpt }}
+                </b-card-text>
+                <hr />
+                <div class="d-flex justify-content-between">
+                  <b-link
+                    :to="{ name: 'second-page', params: { id: blog.id } }"
+                    class="font-weight-bold ml-auto"
+                  >
+                    Daha fazla...
+                  </b-link>
+                </div>
+              </div>
             </b-card-body>
           </b-col>
         </b-row>
@@ -96,7 +87,6 @@ import {
   BPagination,
 } from "bootstrap-vue";
 import { kFormatter } from "@core/utils/filter";
-
 
 export default {
   components: {
@@ -132,7 +122,7 @@ export default {
           blogPosted: "02 Eylül 2023",
           tags: ["Oyun", "Spor"],
           excerpt:
-          'E-spor, son yıllarda dünya genelinde büyük bir yükseliş yaşayan ve hızla büyümeye devam eden bir fenomendir. Geleneksel spor dallarının aksine, e-spor, oyuncuların bilgisayarlar veya oyun konsolları üzerinden rekabet ettiği bir arenadır. Ancak, bu dijital dünya çoktan sadece bir oyun olarak görülmüyor.', 
+            "E-spor, son yıllarda dünya genelinde büyük bir yükseliş yaşayan ve hızla büyümeye devam eden bir fenomendir. Geleneksel spor dallarının aksine, e-spor, oyuncuların bilgisayarlar veya oyun konsolları üzerinden rekabet ettiği bir arenadır. Ancak, bu dijital dünya çoktan sadece bir oyun olarak görülmüyor.",
           comment: 2100,
         },
 
@@ -183,24 +173,12 @@ export default {
 };
 </script>
 
-<style> 
-@import url('https://fonts.googleapis.com/css2?family=Abel&family=Dancing+Script&family=Prompt:wght@200&display=swap');
-.blog-title-truncate{
-font-size: 31px;
-}
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Abel&family=Dancing+Script&family=Prompt:wght@200&display=swap");
 
-.fontCard{
-  font-family: 'Prompt', sans-serif;
+.fontCard {
+  font-family: "Prompt", sans-serif;
 }
-
-.text-body{
-  font-size: 14px;
-}
-
-.blog-content-truncate{
-  font-size: 20px;
-}
-
 </style>
 
 <style lang="scss">

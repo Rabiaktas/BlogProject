@@ -197,8 +197,7 @@ export default {
             regEmail: this.post.regEmail,
             password: this.post.password,
             status: this.post.status,
-          }
-       
+          }      
         )
         .then((response) => {
           console.log(response);

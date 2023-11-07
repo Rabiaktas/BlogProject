@@ -31,9 +31,9 @@
               </b-media-body>
             </b-media>
             <b-card-title>
-              <b-link class="blog-title-truncate text-body-heading">
+              <h4 class="text-body-heading">
                 {{ blog.title }}
-              </b-link>
+              </h4>
             </b-card-title>
            
             <div class="my-1 py-20">
@@ -71,8 +71,35 @@
             </div>
           </b-card-body>
         </b-card>
-      </b-card-group>
+      </b-card-group> 
     </b-col>
+    <b-col cols="12">
+        <!-- pagination -->
+        <div class="my-2">
+          <b-pagination
+            v-model="currentPage"
+            align="center"
+            :total-rows="rows"
+            first-number
+            last-number
+            prev-class="prev-item"
+            next-class="next-item"
+          >
+            <template #prev-text>
+              <feather-icon
+                icon="ChevronLeftIcon"
+                size="18"
+              />
+            </template>
+            <template #next-text>
+              <feather-icon
+                icon="ChevronRightIcon"
+                size="18"
+              />
+            </template>
+          </b-pagination>
+        </div>
+      </b-col>
   </b-row>
 </template>
 
@@ -211,6 +238,7 @@ export default {
       ],
       perPage: 1,
       rows: 140,
+      currentPage: 1,
     };
   },
   methods: {
@@ -234,9 +262,6 @@ export default {
   font-family: "Prompt", sans-serif;
 }
 
-.blog-title-truncate {
-  font-size: 20px;
-}
 .card-img-top {
   margin-top: 0;
 }
@@ -244,6 +269,7 @@ export default {
   background:transparent !important ;
   border: none;
 }
+
 </style>
 <style lang="scss">
 @import "@core/scss/vue/pages/page-blog.scss";

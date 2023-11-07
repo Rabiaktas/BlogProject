@@ -2,10 +2,9 @@
   <div>
     <!-- NavBar-->
     <just-nav />
-
     <!-- İmg-->
     <b-img
-      class="aboutImg"
+      class="aboutImg mt-5"
       src="../assets/images/pages/about.jpeg"
       fluid
       alt="Responsive image"
@@ -14,7 +13,7 @@
     <!-- Title-->
     <div class="container">
       <b-row align="center">
-        <b-col> <p class="aboutText">ABOUT US</p></b-col>
+        <b-col> <p class="aboutText">HAKKIMIZDA</p></b-col>
       </b-row>
     </div>
     <div class="container ikincikisim">
@@ -94,6 +93,7 @@ export default {
   height: 550px;
   object-fit: cover;
   object-position: 50% 50%;
+  
 }
 .aboutText {
   height: auto;

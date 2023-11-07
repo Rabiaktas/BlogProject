@@ -9,7 +9,7 @@
         <div class="container">
           <b-row>
             <b-col md="4"></b-col>
-            
+
             <!-- email -->
             <b-col md="4">
               <h4 class="mailText">Join My Mailing List</h4>
@@ -17,21 +17,23 @@
                 <b-form-input
                   id="ft-email"
                   type="email"
+                  v-model="email"
                   placeholder="info@mysite.com"
                 />
               </div>
               <div class="demo-inline-spacing">
-                <b-button
+                <!--click methodunu unutma-->
+                <b-button                
                   v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                   variant="outline-dark"
                   class="emailButton"
                   block
                 >
-                  Subscribe Now
+                  Bize Katıl
                 </b-button>
               </div>
               <br />
-               <!-- social buttons -->
+              <!-- social buttons -->
               <div class="auth-footer-btn d-flex justify-content-center">
                 <b-button
                   class="facebook"
@@ -53,9 +55,10 @@
                   href="javascript:void(0)"
                 >
                   <feather-icon icon="GithubIcon" />
-                </b-button> 
-              </div><br>
-              <p>© 2035 by Rabish Blog.</p>
+                </b-button>
+              </div>
+              <br />
+              <p>© 2023 by Rabish Blog.</p>
             </b-col>
           </b-row>
         </div>
@@ -66,7 +69,11 @@
 <script>
 import { BRow, BCol, BButton, BFormGroup, BFormInput } from "bootstrap-vue";
 import Ripple from "vue-ripple-directive";
+//import db from "@/firebase/firebase"
+//import firebase from "firebase/app";
+//import "firebase/auth";
 export default {
+  name:"Footer",
   components: {
     BButton,
     BCol,
@@ -77,13 +84,34 @@ export default {
   directives: {
     Ripple,
   },
+  data() {
+    return {     
+        email: "", 
+        error: null,
+        errorMsg: "",  
+    };
+  },
+
   methods: {
     scrollToTop() {
       window.scrollTo({
         top: 0,
         behavior: "smooth", // Animasyonlu kaydırma
       });
-    },
+    },    
+    /*
+    async footer(){
+      if(
+        this.email !== "" ||
+      ){
+        this.error =false;
+        this.errorMsg = "";
+        const firebaseAuth = await firebase.auth();
+        const createEmail = await firebaseAuth.
+        return;
+      }
+    }*/
+   
   },
 };
 </script>
@@ -98,14 +126,12 @@ footer {
   background-color: black;
   border-radius: 0%;
   font-family: "Prompt", sans-serif;
-
 }
 .footerLink {
   color: white;
   font-family: "Prompt", sans-serif;
   font-size: 30px;
 }
-
 .facebook {
   margin-right: 2px;
   background-color: black;
@@ -115,7 +141,6 @@ footer {
   margin-right: 2px;
   background-color: black !important;
 }
-
 .mail {
   margin-right: 2px;
   background-color: black;
@@ -132,13 +157,12 @@ footer {
   font-size: 22px;
 }
 .emailButton {
-color: white;
-margin-right: 0%;
-margin-top: 5px;
-font-family: "Prompt", sans-serif;
-border-radius: 0%;
+  color: white;
+  margin-right: 0%;
+  margin-top: 5px;
+  font-family: "Prompt", sans-serif;
+  border-radius: 0%;
 }
-
 #ft-email {
   border-radius: 0%;
 }

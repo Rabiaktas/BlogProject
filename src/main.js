@@ -28,6 +28,7 @@ require('@/assets/scss/style.scss')
 
 Vue.config.productionTip = false
 
+
 new Vue({
   router,
   store,

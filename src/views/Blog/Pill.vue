@@ -45,8 +45,7 @@
           ></b-row>
         </b-card-text>
       </b-tab>
-    </b-tabs>
-    <div>{{ activeBlogId }}</div>
+    </b-tabs>  
     <!-- Footer -->
     <footer-vue></footer-vue>
   </div>
