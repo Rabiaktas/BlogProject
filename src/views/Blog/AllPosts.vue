@@ -47,23 +47,10 @@
               blog.excerpt
             }}</b-card-text>
             <hr />
-            <div class="d-flex justify-content-between align-items-center">
-              <b-link :to="{ path: `/pages/blog/${blog.id}#blogComment` }">
-                <div class="d-flex align-items-center text-body">
-                  <feather-icon icon="HeartIcon" class="mr-50" />
-                  <span class="font-weight-bold"
-                    >{{ kFormatter(blog.comment) }}</span
-                  >
-                  <feather-icon icon="MessageSquareIcon" class="mr-50 ml-1" />                
-                  <span class="font-weight-bold"
-                    >{{ kFormatter(blog.comment) }} Comments</span
-                  >
-                </div>
-              </b-link>
-
+            <div class="d-flex justify-content-between align-items-right">
               <!-- Read More Button -->
               <b-button
-                class="ReadMore"
+                class="ReadMore ml-auto"
                 @click="changeActiveTab(blog.id, blog.tabs)"
               >
                 <feather-icon style="color: grey;" icon="ChevronsRightIcon" class="mr-50" />
@@ -72,9 +59,10 @@
           </b-card-body>
         </b-card>
       </b-card-group> 
-    </b-col>
+    </b-col> 
+     <!-- pagination 
     <b-col cols="12">
-        <!-- pagination -->
+      
         <div class="my-2">
           <b-pagination
             v-model="currentPage"
@@ -99,7 +87,7 @@
             </template>
           </b-pagination>
         </div>
-      </b-col>
+      </b-col>  -->
   </b-row>
 </template>
 
@@ -149,92 +137,83 @@ export default {
     return {
       search_query: "",
       blogList: [
-        {
-          id: 1,
-          img: require("@/assets/images/slider/moda.jpg"),
+      {
+          id: 6,
+          img: require("@/assets/images/allPost/allpost.6.jpg"),
           title:
-            "Moda Dünyasının Şaşırtıcı Dönüşü: Geçmişten Geleceğe Stil Yolculuğu",
-          avatar: require("@/assets/images/avatars/rabiaa.jpeg"),
-          userFullName: "Rabia Aktaş",
-          blogPosted: " 31 Ağustos 2023",
-          tags: ["Trend"],
-          tabs: "trend",
+            "Sakarya Kent Park ve Uçak Kafe: Doğanın İçinde Eşsiz Bir Mekân",
+          avatar: require("@/assets/images/avatars/caglaa.jpg"),
+          userFullName: "Çağla Düdükçü",
+          blogPosted: "01.12.2023",
+          tags: ["Sakarya"],
+          tabs: "sakarya",
           excerpt:
-            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes ",
-          comment: 76,
+            " Sakarya'nın gözde noktalarından biri olan Kent Park, ziyaretçilerine doğanın...",
         },
-        {
-          id: 2,
-          // eslint-disable-next-line global-require
-          img: require("@/assets/images/slider/game1.jpg"),
-          title: "E-Spor: Dijital Arenada Yükselen Bir Fenomen ",
-          // eslint-disable-next-line global-require
-          avatar: require("@/assets/images/avatars/Arda.jpeg"),
-          userFullName: "Arda Emir Noğan",
-          blogPosted: "02 Eylül 2023",
-          tags: ["Eglence"],
-          tabs: "eglence",
-          excerpt:
-            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes ",
-          comment: 2100,
-        },
-        {
-          id: 3,
-          img: require("@/assets/images/slider/yemek1.jpg"),
+      {
+          id: 5,
+          img: require("@/assets/images/allPost/allpost.5.jpg"),
           title:
-            "Lezzet Dünyasının Sıradışı Serüveni: Damak Tadınıza Yolculuk!",
-          avatar: require("@/assets/images/portrait/small/avatar-s-3.jpg"),
-          userFullName: "Rabia Aktaş",
-          blogPosted: "02 Eylül 2023",
-          tags: ["Trend"],
-          tabs: "trend",
+            "Şehrin Karmaşasından Uzakta Doğayla Buluşma Adresi",
+          avatar: require("@/assets/images/avatars/caglaa.jpg"),
+          userFullName: "Çağla Düdükçü",
+          blogPosted: "26.11.2023",
+          tags: ["Sakarya"],
+          tabs: "sakarya",
           excerpt:
-            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes",
-          comment: 243,
+            " Sakarya'nın gözlerden uzak, doğanın sakin kollarında gizlenmiş incisi... ",
         },
         {
           id: 4,
-          // eslint-disable-next-line global-require
-          img: require("@/assets/images/slider/yemek.jpg"),
-          title: "Mutfak Sanatının Büyüsü: Lezzetin Perde Arkası",
-          // eslint-disable-next-line global-require
-          avatar: require("@/assets/images/portrait/small/avatar-s-14.jpg"),
-          userFullName: "Rabia Aktaş",
-          blogPosted: "02 Eylül 2023",
+          img: require("@/assets/images/allPost/allpost.4.jpg"),
+          title: "Sakarya Üniversitesi Kampüsü: Eğitimdeki Renkli Durağınız",
+          avatar: require("@/assets/images/avatars/caglaa.jpg"),
+          userFullName: "Çağla Düdükçü",
+          blogPosted: "23.11.2023",
+          tags: ["Kampüs",],
+          tabs: "kampüs",
+          excerpt:
+            " Sakarya Üniversitesi, Türkiye'nin önde gelen yüksek öğretim kurumlarından biridir...  ",
+        },
+      {
+          id: 3,
+          img: require("@/assets/images/allPost/allpost.3.jpg"),
+          title: "Sessizliğin ve Doğanın Buluştuğu Nokta: Serdivan Gölpark",
+          avatar: require("@/assets/images/avatars/caglaa.jpg"),
+          userFullName: "Çağla Düdükçü",
+          blogPosted: "18.11.2023",
+          tags: ["Sakarya",],
+          tabs: "sakarya",
+          excerpt:
+            " Yolculuklar, insanı beklenmedik yerlere sürükleyebilir. Sakarya'nın gizemli köşelerinden...  ",
+        },
+      {
+          id: 2,
+          img: require("@/assets/images/allPost/allpost.2.jpg"),
+          title: "Sapancanın Tatlı Sürprizi: Uğurlu Dükkan",
+          avatar: require("@/assets/images/avatars/caglaa.jpg"),
+          userFullName: "Çağla Düdükçü",
+          blogPosted: "15.11.2023",
+          tags: ["Trend",],
+          tabs: "trend",
+          excerpt:
+            " Bugün, kısa bir kaçamak için Sapancayı tercih ettim ve şanslı dükkan, benim ilk durağım... ",
+        },
+        {
+          id: 1,
+          img: require("@/assets/images/allPost/welcome.gif"),
+          title:
+            "LifeSakarya'ya Hoş Geldiniz!",
+          avatar: require("@/assets/images/avatars/rabiaa.jpeg"),
+          userFullName: "Rabia || Çağla",
+          blogPosted: " 14.11.2023",
           tags: ["Trend"],
           tabs: "trend",
           excerpt:
-            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes",
-          comment: 3200,
+            "Sakarya'nın kalbinde bir soluklanma noktasına hoş geldiniz. LifeSakarya, bu şehrin nefes kesen güzelliklerini... ",
+          comment: 76,
         },
-        {
-          id: 5,
-          img: require("@/assets/images/slider/tasarım.jpg"),
-          title: "Kodlama Büyüsü: Yazılımın Sihirli Dokunuşu!",
-          avatar: require("@/assets/images/portrait/small/avatar-s-2.jpg"),
-          userFullName: "Rabia Aktaş",
-          blogPosted: "02 Eylül 2023",
-          tags: ["Tasarim"],
-          tabs: "tasarim",
-          excerpt:
-            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes",
-          comment: 319,
-        },
-        {
-          id: 6,
-          // eslint-disable-next-line global-require
-          img: require("@/assets/images/slider/basketbol.jpg"),
-          title: "NBA 2023 Sezonunda Göz Atılması Gerekenler",
-          // eslint-disable-next-line global-require
-          avatar: require("@/assets/images/portrait/small/avatar-s-13.jpg"),
-          userFullName: "Arda Emir Noğan",
-          blogPosted: "3 Eylül 2023",
-          tags: ["Eglence"],
-          tabs: "eglence",
-          excerpt:
-            "Donut fruitcake soufflé apple pie candy canes jujubes croissant chocolate bar ice cream.Donut fruitcake soufflé apple pie candy canes",
-          comment: 1500,
-        },
+       
       ],
       perPage: 1,
       rows: 140,
@@ -244,9 +223,9 @@ export default {
   methods: {
     kFormatter,
     tagsColor(tag) {
-      if (tag === "Tasarim") return "light-info";
-      if (tag === "Eglence") return "light-warning";
-      if (tag === "Trend") return "light-success";
+      if (tag === "Kampüs") return "light-info";
+      if (tag === "Trend") return "light-warning";
+      if (tag === "Sakarya") return "light-success";
       return "light-primary";
     },
     changeActiveTab(id, tabs) {

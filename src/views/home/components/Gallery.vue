@@ -15,7 +15,7 @@
             <div class="image-container">
               <b-img :src="data.img" fluid />
               <div class="container overlay">
-                <div>@JourneyBlog</div>
+                <div>@LifeSakarya</div>
               </div>
             </div>
           </swiper-slide>
@@ -44,14 +44,20 @@ export default {
     return {
       /* eslint-disable global-require */
       swiperData: [
-        { img: require("@/assets/images/banner/banner-31.jpg") },
-        { img: require("@/assets/images/banner/banner-32.jpg") },
-        { img: require("@/assets/images/banner/banner-33.jpg") },
-        { img: require("@/assets/images/banner/banner-34.jpg") },
-        { img: require("@/assets/images/banner/banner-35.jpg") },
-        { img: require("@/assets/images/banner/banner-32.jpg") },
-        { img: require("@/assets/images/banner/banner-31.jpg") },
-        { img: require("@/assets/images/banner/banner-35.jpg") },
+      { img: require("@/assets/images/banner/gallery.0..jpg") },
+        { img: require("@/assets/images/banner/gallery.1.jpg") },
+        { img: require("@/assets/images/banner/gallery.2.jpg") },
+        { img: require("@/assets/images/banner/gallery.3.jpg") },
+        { img: require("@/assets/images/banner/gallery.4.jpg") },
+        { img: require("@/assets/images/banner/gallery.5.jpg") },
+        { img: require("@/assets/images/banner/gallery.6.jpg") },
+        { img: require("@/assets/images/banner/gallery.7.jpg") },
+        { img: require("@/assets/images/banner/gallery.8.jpg") },
+        { img: require("@/assets/images/banner/gallery.9.jpg") },
+        { img: require("@/assets/images/banner/gallery.10.jpg") },
+        { img: require("@/assets/images/banner/gallery.11.jpg") },
+
+
       ],
       /* eslint-disable global-require */
       swiperOptions: {

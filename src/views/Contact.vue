@@ -2,7 +2,7 @@
   <div>
     <!-- NavBar-->
     <just-nav />
-  
+
     <!--Form -->
     <div class="cardForm">
       <b-row>
@@ -10,7 +10,9 @@
         <b-col md="8">
           <br />
           <b-card class="contactCard">
-            <b-col md="12"><h2>Bizimle Çalışmak İçin;</h2></b-col>
+            <b-col md="12"
+              ><h2>Bizimle çalışmak, istek ve önerileriniz için;</h2></b-col
+            >
             <hr />
 
             <b-col md="12">
@@ -18,23 +20,37 @@
                 <b-row>
                   <b-col md="6">
                     <b-form-group label="İsim" label-for="mc-first-name">
-                      <b-form-input v-model="post.userName" id="mc-first-name" />
+                      <b-form-input
+                        v-model="post.userName"
+                        id="mc-first-name"
+                      />
                     </b-form-group>
                   </b-col>
                   <b-col md="6">
                     <b-form-group label="Soyisim" label-for="mc-last-name">
-                      <b-form-input v-model="post.userLastName" id="mc-last-name" />
+                      <b-form-input
+                        v-model="post.userLastName"
+                        id="mc-last-name"
+                      />
                     </b-form-group>
                   </b-col>
                   <b-col md="6">
                     <b-form-group label="Telefon" label-for="v-mobile">
-                      <b-form-input v-model="post.mobile" id="v-mobile" type="number" />
+                      <b-form-input
+                        v-model="post.mobile"
+                        id="v-mobile"
+                        type="number"
+                      />
                     </b-form-group>
                   </b-col>
                   <b-col md="6">
                     <b-form-group label-for="mc-email" label="Email">
                       <div class="form-label-group">
-                        <b-form-input v-model="post.email" id="mc-email" type="email" />
+                        <b-form-input
+                          v-model="post.email"
+                          id="mc-email"
+                          type="email"
+                        />
                       </div>
                     </b-form-group>
                   </b-col>
@@ -44,7 +60,7 @@
                         id="textarea"
                         rows="3"
                         placeholder="Hakkınızda.."
-                        v-model="post.userLastName"
+                        v-model="post.aboutYou"
                       />
                     </div>
                   </b-col>
@@ -58,7 +74,6 @@
                       type="submit"
                       variant="outline-secondary"
                       id="submitForm"
-                      v-model="post.aboutYou"
                     >
                       GÖNDER
                     </b-button>
@@ -92,7 +107,8 @@ import {
 import JustNav from "./home/components/JustNav.vue";
 import Ripple from "vue-ripple-directive";
 import footerVue from "./home/components/footer.vue";
-import axios from "axios";
+import firebase from "firebase/app";
+import "firebase/firestore";
 export default {
   components: {
     JustNav,
@@ -113,40 +129,53 @@ export default {
     Ripple,
   },
   data() {
-      return {
-        post: {
-          userName: "",
-          userLastName: "",
-          mobile: "",
-          email: "",
-          aboutYou: "",
-        }
-      }
-    },
+    return {
+      post: {
+        userName: "",
+        userLastName: "",
+        mobile: "",
+        email: "",
+        aboutYou: "",
+      },
+    };
+  },
   methods: {
-      onSubmit() {
-        axios.post("https://rabishblogpublic-default-rtdb.firebaseio.com/posts.json", {...this.post, updatedDate: new Date()})
-          .then(response => {
-            console.log(response)
-            this.post = {}
-          })
-          .catch(e => console.log(e));
-
+    onSubmit() {
+      const firebaseConfig = {
+        apiKey: "AIzaSyBJZPyeVpcyNNz9g7qQfpnW-xElhps6Rl4",
+        authDomain: "blogdatabase-a62bf.firebaseapp.com",
+        projectId: "blogdatabase-a62bf",
+        storageBucket: "blogdatabase-a62bf.appspot.com",
+        messagingSenderId: "527551787059",
+        appId: "1:527551787059:web:68b45df4aca49941277346",
+      };
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
       }
-    }
+      const db = firebase.firestore();
+      const postsCollection = db.collection("contact");
+      postsCollection
+        .add({ ...this.post, updatedDate: new Date() })
+        .then(response => {
+          console.log(response);
+          this.post = {};
+        })
+        .catch(e => console.log(e));
+    },
+  },
 };
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Abel&family=Dancing+Script&family=Prompt:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 .cardForm {
-  margin-top: 120px;
+  margin-top: 110px;
   font-family: "Prompt", sans-serif;
   background-image: url(../assets/images/icons/contactArkaPlan.jpg);
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
-  background-attachment: fixed; 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .headtitle {
   font-family: "Prompt", sans-serif;
@@ -170,17 +199,14 @@ h2 {
 #mc-last-name {
   border: 1px solid black !important;
   border-radius: 0%;
-
 }
 #textarea {
   border: 1px solid black !important;
   border-radius: 0%;
-
 }
 #v-mobile {
   border: 1px solid black !important;
   border-radius: 0%;
-
 }
 #mc-first-name {
   border: 1px solid black !important;
@@ -189,16 +215,15 @@ h2 {
 #mc-email {
   border: 1px solid black !important;
   border-radius: 0%;
-
 }
 #submitForm {
   border: 1px solid black !important;
   padding: 15px 50px;
   font-size: 18px;
   color: black;
-  background-color:white  ;
+  background-color: white;
   border-radius: 0%;
-  transition: background-color 0.3s, color 0.3s; 
+  transition: background-color 0.3s, color 0.3s;
 }
 #submitForm:hover {
   background-color: black; /* Hover olduğunda arka plan rengi */

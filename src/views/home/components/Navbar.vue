@@ -5,20 +5,20 @@
       <b-navbar toggleable="lg">
         <b-navbar-brand href="/">
           <b-img
-            src="../../../assets/images/logo/JourneyBlogLogo.png"
+            src="../../../assets/images/logo/lifeSakarya.png"
             class="logo-img"
             width="190"
-            height="85"
+            height="80"
           >
           </b-img>
         </b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item href="/">Anasayfa</b-nav-item>
-            <b-nav-item href="/second-page">Blog</b-nav-item>
-            <b-nav-item href="/about">Hakkında</b-nav-item>
-            <b-nav-item href="/contact">İletişim</b-nav-item>
+            <b-nav-item @click="$router.push('/')">Anasayfa</b-nav-item>
+            <b-nav-item @click="$router.push('/second-page')">Blog</b-nav-item>
+            <b-nav-item @click="$router.push('/about')">Hakkında</b-nav-item>
+            <b-nav-item @click="$router.push('/contact')">İletişim</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar></b-card
@@ -28,7 +28,7 @@
     <!-- Desıgn For Life -->
     <b-card class="headtitle mt-4">
       <div class="container">
-        <h1 align="center">DESIGN <span class="titleFor">FOR</span> LIFE</h1>
+        <h1 align="center">Sakarya'da <span class="titleFor">  Öğren, Yaşa</span> ve  <span class="titleFor"> Paylaş</span> </h1>
       </div>
     </b-card>
     <br />
@@ -104,6 +104,7 @@ h1 {
 }
 .titleFor {
   font-weight: 200;
+  color:orange
 }
 .fontNavbar {
   font-family: "Prompt", sans-serif;

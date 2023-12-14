@@ -4,7 +4,7 @@
       <!-- Register v1 -->
       <b-card class="mb-0">
         <b-link class="brand-logo">
-          <h2 class="brand-text text-primary ml-1">Rabish Blog</h2>
+          <h2 class="brand-text text-primary ml-1">LifeSakarya Blog</h2>
         </b-link>
 
         <b-card-title class="mb-1"> Macera Burada Başlıyor... 🚀 </b-card-title>
@@ -16,8 +16,9 @@
         <validation-observer ref="registerForm">
           <b-form
             class="auth-register-form mt-2"
-            @submit.prevent="validationForm"
+           
           >
+            <div class="error">{{ this.errorMsg }}</div> <br>
             <!-- username -->
             <b-form-group label="Kullanıcı Adı" label-for="username">
               <validation-provider
@@ -103,7 +104,7 @@
               variant="primary"
               block
               type="submit"
-              @click.prevent="validationForm"
+              @click.prevent="UserSave"
             >
               Kayıt Ol
             </b-button>
@@ -140,9 +141,13 @@ import {
 import VuexyLogo from "@core/layouts/components/Logo.vue";
 import { required, email } from "@validations";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
-import ToastificationContent from "@core/components/toastification/ToastificationContent.vue";
-import axios from "axios";
+import firebase from "firebase/app";
+import db from "../../firebase/firebase";
+import "firebase/auth"
+
+
 export default {
+  name: "Register",
   components: {
     VuexyLogo,
     // BSV
@@ -173,6 +178,8 @@ export default {
       // validation rules
       required,
       email,
+      error:null,
+      errorMsg:"",
     };
   },
   computed: {
@@ -181,42 +188,39 @@ export default {
     },
   },
   methods: {
-    validationForm() {
-      this.$refs.registerForm.validate().then((success) => {
-        if (success) {
-          this.onSubmit();
-        }
-      });
-    },
-    UserSave() {},
-    onSubmit() {
-      axios
-        .post(
-          "https://rabishblog-default-rtdb.firebaseio.com/posts.json", {
-            username: this.post.username,
-            regEmail: this.post.regEmail,
-            password: this.post.password,
-            status: this.post.status,
-          }      
-        )
-        .then((response) => {
-          console.log(response);
-          this.$toast({
-            component: ToastificationContent,
-            props: {
-              title: "Form Submitted",
-              icon: "EditIcon",
-              variant: "success",
-            },
+   
+   async UserSave() {
+        if(
+          this.post.password !== "" &&
+          this.post.regEmail !== "" &&
+          this.post.username !== "" 
+        ) {
+          this.error =false;
+          this.errosMsg = "";
+          const firebaseAuth = await firebase.auth()
+          const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email, this.password)
+          const result = await createUser;
+          const dataBase = db.collection("users").doc(result.user.uid)
+          await dataBase.set({
+           password: this.post.password,
+           regEmail: this.post.regEmail,
+           username: this.post.username
           });
-          this.$router.push({ name: "profile" });
-        })
-        .catch((e) => console.log(e));
-    },
-  },
-};
+          this.$$router.push({name: "home"})
+          return;
+        }
+        this.error =true;
+        this.errorMsg= "Lütfen tüm alanları doldurun!"
+        return;
+},
+  } 
+}
 </script>
-
+<style scoped>
+.error{
+color: red;
+}
+</style>
 <style lang="scss">
 @import "@core/scss/vue/pages/page-auth.scss";
 </style>

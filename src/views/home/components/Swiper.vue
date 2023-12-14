@@ -29,15 +29,18 @@ export default {
     return {
       /* eslint-disable global-require */
       swiperData: [
-        { img: require("@/assets/images/banner/banner-7.jpg") },
-        { img: require("@/assets/images/banner/banner-4.jpg") },
-        { img: require("@/assets/images/banner/banner-14.jpg") },
-        { img: require("@/assets/images/banner/banner-3.jpg") },
-        { img: require("@/assets/images/banner/banner-20.jpg") },
-        { img: require("@/assets/images/banner/banner-8.jpg") },
-        { img: require("@/assets/images/banner/banner-9.jpg") },
-        { img: require("@/assets/images/banner/banner-10.jpg") },
-        { img: require("@/assets/images/banner/banner-11.jpg") },
+        { img: require("@/assets/images/banner/4.jpg") },
+        { img: require("@/assets/images/banner/7.jpg") },
+        { img: require("@/assets/images/banner/11.jpg") },
+        { img: require("@/assets/images/banner/1.jpg") },
+        { img: require("@/assets/images/banner/2.jpg") },
+        { img: require("@/assets/images/banner/5.jpg") },
+        { img: require("@/assets/images/banner/9.jpg") },
+        { img: require("@/assets/images/banner/13.jpg") },
+        { img: require("@/assets/images/banner/10.jpg") },
+        { img: require("@/assets/images/banner/6.jpg") },
+        
+
       ],
       swiperOptions: {
         spaceBetween: 30,

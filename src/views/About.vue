@@ -5,7 +5,7 @@
     <!-- İmg-->
     <b-img
       class="aboutImg mt-5"
-      src="../assets/images/pages/about.jpeg"
+      src="../assets/images/banner/3.jpg"
       fluid
       alt="Responsive image"
     />
@@ -22,15 +22,14 @@
         <b-col md="4">
           <b-card
             class="aboutCard"
-            img-src="../assets/images/avatars/Arda.jpeg"
+            img-src="../assets/images/avatars/cagla.jpeg"
             img-alt="Card image cap"
             img-top
           >
             <b-card-text>
-              <h3 class="aboutTitle">HI! I'M ARDA</h3>
+              <h3 class="aboutTitle">Selam! Ben Çağla</h3>
               <hr />
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+            Sakarya Üniversitesi Gazetecilik bölümü öğrencisiyim. Gazetecilik projemizi faydalı bir uğraş haline getirmek amacıyla bu bloğu kurduk. İmkanlarımız el verdikçe türlü konularda izlenim ve fikirlerimizi burada paylaşacağız.
             </b-card-text>
           </b-card>
         </b-col>
@@ -38,15 +37,14 @@
         <b-col md="4">
           <b-card
             class="aboutCard"
-            img-src="../assets/images/avatars/rabiaa.jpeg"
+            img-src="../assets/images/avatars/rabia.jpeg"
             img-alt="Card image cap"
             img-top
           >
             <b-card-text>
-              <h3 class="aboutTitle">HI! I'M RABİA</h3>
+              <h3 class="aboutTitle">Selam! Ben Rabia</h3>
               <hr />
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+              Sakarya Üniversitesi Gazetecilik bölümü son sınıf öğrencisiyim. Bunun yanı sıra yazılımla ilgileniyorum. Gazetecilik projesi kapsamında bu web sitesini tasarladık. Günden güne kendimizi olduğu gibi web sayfamızı da geliştirmeye çalışıyoruz. Umarım sizin de hoşunuza gitmiştir.  
             </b-card-text>
           </b-card>
         </b-col>
@@ -54,7 +52,7 @@
       </b-row>
     </div>
     <!--Footer-->
-    <footer-vue></footer-vue>
+    <footer-vue ></footer-vue>
   </div>
 </template>
 <script>
@@ -90,16 +88,17 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Abel&family=Dancing+Script&family=Prompt:wght@300&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 .aboutImg {
+  width: 100%;
   height: 550px;
   object-fit: cover;
   object-position: 50% 50%;
-  
 }
+
 .aboutText {
   height: auto;
   font-size: 50px;
   font-family: 'Prompt', sans-serif;
-  color: #ada77e;
+  color: orange;
   margin: 50px;
 }
 .aboutTitle {

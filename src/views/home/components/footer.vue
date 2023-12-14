@@ -2,7 +2,9 @@
   <footer>
     <div class="jumbotron text-center">
       <div class="container">
-        <h2 class="footerLink"><a @click="scrollToTop">DESIGN FOR LIFE</a></h2>
+        <h2 class="footerLink">
+          <a @click="scrollToTop">Sakarya'da Öğren, Yaşa ve Paylaş</a>
+        </h2>
         <hr />
         <br />
 
@@ -12,22 +14,21 @@
 
             <!-- email -->
             <b-col md="4">
-              <h4 class="mailText">Join My Mailing List</h4>
+              <h4 class="mailText">Posta Listemize Katılın</h4>
               <div class="form-label-group">
                 <b-form-input
                   id="ft-email"
                   type="email"
                   v-model="email"
-                  placeholder="info@mysite.com"
+                  placeholder="info@gmail.com"
                 />
               </div>
               <div class="demo-inline-spacing">
-                <!--click methodunu unutma-->
-                <b-button                
-                  v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                <b-button
                   variant="outline-dark"
                   class="emailButton"
                   block
+                  @click="onSubmit"
                 >
                   Bize Katıl
                 </b-button>
@@ -36,29 +37,31 @@
               <!-- social buttons -->
               <div class="auth-footer-btn d-flex justify-content-center">
                 <b-button
-                  class="facebook"
-                  variant="facebook"
-                  href="javascript:void(0)"
+                  class="youtube"
+                  variant="google"
+                  href="https://youtube.com/@LifeSakarya?si=2nk9jyfnyeTII2Iq"
+                  target="_blank"
                 >
-                  <feather-icon icon="FacebookIcon" />
+                  <feather-icon icon="YoutubeIcon" />
+                </b-button>
+                <b-button
+                  class="fab fa-instagram Instagram"
+                  variant="instagram"
+                  href="https://www.instagram.com/lifesakaryatr/"
+                  target="_blank"
+                >
+                  <feather-icon icon="InstagramIcon" />
                 </b-button>
                 <b-button
                   class="mail"
                   variant="google"
-                  href="javascript:void(0)"
+                  href="mailto:journeyblog@outlook.com.tr"
                 >
                   <feather-icon icon="MailIcon" />
                 </b-button>
-                <b-button
-                  class="githup"
-                  variant="github"
-                  href="javascript:void(0)"
-                >
-                  <feather-icon icon="GithubIcon" />
-                </b-button>
               </div>
               <br />
-              <p>© 2023 by Rabish Blog.</p>
+              <p>© 2023 by LifeSakarya</p>
             </b-col>
           </b-row>
         </div>
@@ -66,55 +69,80 @@
     </div>
   </footer>
 </template>
+
 <script>
-import { BRow, BCol, BButton, BFormGroup, BFormInput } from "bootstrap-vue";
-import Ripple from "vue-ripple-directive";
-//import db from "@/firebase/firebase"
-//import firebase from "firebase/app";
-//import "firebase/auth";
+import { BRow, BCol, BButton, BFormInput } from "bootstrap-vue";
+import firebaseMixin from "../../../firebase/firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBJZPyeVpcyNNz9g7qQfpnW-xElhps6Rl4",
+  authDomain: "blogdatabase-a62bf.firebaseapp.com",
+  projectId: "blogdatabase-a62bf",
+  storageBucket: "blogdatabase-a62bf.appspot.com",
+  messagingSenderId: "527551787059",
+  appId: "1:527551787059:web:68b45df4aca49941277346",
+};
+
+console.log("firebase log : " + firebase.apps.length);
+
+// bağlantı yoksa yeni bağlantı kurmak için
+if (!firebase.apps.length) {
+  console.log("!firebase log : " + firebase.apps.length);
+  firebase.initializeApp(firebaseConfig);
+}
+
 export default {
-  name:"Footer",
+  name: "Footer",
   components: {
     BButton,
     BCol,
     BRow,
-    BFormGroup,
     BFormInput,
   },
-  directives: {
-    Ripple,
-  },
+  mixins: [firebaseMixin],
   data() {
-    return {     
-        email: "", 
-        error: null,
-        errorMsg: "",  
+    return {
+      email: "",
+      error: null,
+      errorMsg: "",
+      submitting: false,
     };
   },
-
   methods: {
     scrollToTop() {
       window.scrollTo({
         top: 0,
         behavior: "smooth", // Animasyonlu kaydırma
       });
-    },    
-    /*
-    async footer(){
-      if(
-        this.email !== "" ||
-      ){
-        this.error =false;
-        this.errorMsg = "";
-        const firebaseAuth = await firebase.auth();
-        const createEmail = await firebaseAuth.
-        return;
+    },
+    async onSubmit() {
+      try {
+        this.submitting = true;
+        console.log("try a girdi");
+        // Firestore'a veri eklemek için referans oluşturun
+        const firestoreRef = firebase.firestore().collection("footer");
+
+        // Ekleme işlemi
+        const response = await firestoreRef.add({
+          email: this.email,
+        });
+
+        console.log("Veri başarıyla eklendi");
+        this.email = "";
+        // Başarı durumunda istediğiniz ek işlemleri burada gerçekleştirebilirsiniz
+      } catch (error) {
+        console.error("Hata oluştu", error);
+      } finally {
+        this.submitting = false; // Reset submitting flag after submission
       }
-    }*/
-   
+    },
   },
 };
 </script>
+
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Abel&family=Dancing+Script&family=Prompt:wght@300&display=swap");
 
@@ -132,25 +160,22 @@ footer {
   font-family: "Prompt", sans-serif;
   font-size: 30px;
 }
-.facebook {
+.Instagram {
   margin-right: 2px;
   background-color: black;
   border: 1px solid grey;
 }
-.twitter {
+.youtube {
   margin-right: 2px;
-  background-color: black !important;
+  background-color: black;
+  border: 1px solid grey;
 }
 .mail {
   margin-right: 2px;
   background-color: black;
   border: 1px solid grey;
 }
-.githup {
-  margin-right: 2px;
-  background-color: black;
-  border: 1px solid grey;
-}
+
 .mailText {
   font-family: "Dancing Script", cursive;
   color: white;
